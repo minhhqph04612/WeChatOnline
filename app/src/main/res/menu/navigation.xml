@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_news"
+        android:enabled="true"
+        android:icon="@drawable/ic_art_track_black_24dp"
+        android:title="@string/title_news"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/navigation_messegers"
+        android:enabled="true"
+        android:icon="@drawable/ic_chat_bubble_black_24dp"
+        android:title="@string/title_messegers"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/navigation_friends"
+        android:enabled="true"
+        android:icon="@drawable/ic_people_black_24dp"
+        android:title="@string/title_friends"
+        app:showAsAction="always"/>
+
+</menu>

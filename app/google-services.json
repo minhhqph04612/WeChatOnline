@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "192477655968",
+    "firebase_url": "https://wechatonline-75bac.firebaseio.com",
+    "project_id": "wechatonline-75bac",
+    "storage_bucket": "wechatonline-75bac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192477655968:android:15d555550047d36f",
+        "android_client_info": {
+          "package_name": "com.minh.wechatonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192477655968-1lrjqg0eilhpoj5sfviotq8s6a467sjj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minh.wechatonline",
+            "certificate_hash": "a318b703a9f9e8d5a6fcc77a2c273efdc099997c"
+          }
+        },
+        {
+          "client_id": "192477655968-9h89gsnqi71tuu2eu4mcfb0i1kcv5eok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8SS4NN3mczBibbCORLB4pfA8duD2Isa4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192477655968-9h89gsnqi71tuu2eu4mcfb0i1kcv5eok.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

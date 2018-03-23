@@ -17,12 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.minh.wechatonline.Friends.FriendsActivity;
-import com.minh.wechatonline.Friends.FriendsFragment;
 import com.minh.wechatonline.LoginAndRegister.SignInActivity;
 import com.minh.wechatonline.Message.MessagersActivity;
-import com.minh.wechatonline.Message.MessagersFragment;
 import com.minh.wechatonline.News.NewsActivity;
-import com.minh.wechatonline.News.NewsFragment;
 
 public class MainActivity extends TabActivity {
     FirebaseAuth firebaseAuth;
@@ -37,9 +34,9 @@ public class MainActivity extends TabActivity {
     private FrameLayout mainFrame;
 
 
-    private NewsFragment  newsFragment ;
+    /*private NewsFragment  newsFragment ;
     private MessagersFragment messagersFragment;
-    private FriendsFragment friendsFragment;
+    private FriendsFragment friendsFragment;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -28,7 +28,7 @@ public class MainActivity extends TabActivity {
     //Button btnLogout;
     //private FrameLayout mMainFrame;
     //private TextView mTextMessage;
-    //bitch
+    
 
     //private BottomNavigationView bottomNavigationView;
     private FrameLayout mainFrame;

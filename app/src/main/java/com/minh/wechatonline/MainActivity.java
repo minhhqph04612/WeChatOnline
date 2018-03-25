@@ -30,7 +30,7 @@ public class MainActivity extends TabActivity {
     //private TextView mTextMessage;
 
 
-    private String name;
+    //private String name;
     //private BottomNavigationView bottomNavigationView;
     private FrameLayout mainFrame;
 

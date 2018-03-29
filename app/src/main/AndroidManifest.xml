@@ -34,17 +34,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".News.NewsActivity"
-            android:label="@string/title_activity_news"
-             />
+            android:label="@string/title_activity_news" />
         <activity
             android:name=".Message.MessagersActivity"
-            android:label="@string/title_activity_message"
-            />
+            android:label="@string/title_activity_message" />
         <activity
             android:name=".Friends.FriendsActivity"
-            android:label="@string/title_activity_friends"
-             />
-        <activity android:name=".News.NewDetailActivity"></activity>
+            android:label="@string/title_activity_friends" />
+        <activity android:name=".News.NewDetailActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".Activity.UserActivity"></activity>
     </application>
 
 </manifest>

@@ -8,10 +8,10 @@
     tools:context="com.minh.wechatonline.MainActivity">
 
 
-    <!--<TabHost
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">-->
+    <!--<TabHost-->
+            <!---->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">

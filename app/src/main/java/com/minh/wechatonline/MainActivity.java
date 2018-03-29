@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.minh.wechatonline.Activity.ProfileActivity;
+import com.minh.wechatonline.Activity.UserActivity;
 import com.minh.wechatonline.Friends.FriendsActivity;
 import com.minh.wechatonline.LoginAndRegister.SignInActivity;
 import com.minh.wechatonline.Message.MessagersActivity;
@@ -32,7 +32,7 @@ public class MainActivity extends TabActivity {
 
     //private String name;
     //private BottomNavigationView bottomNavigationView;
-    private FrameLayout mainFrame;
+    //private FrameLayout mainFrame;
 
 
     /*private NewsFragment  newsFragment ;
@@ -118,6 +118,7 @@ public class MainActivity extends TabActivity {
         }
         databaseReference = FirebaseDatabase.getInstance().getReference();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
         /*tvUserEmail = (TextView) findViewById(R.id.useremail);
         tvUserEmail.setText("Welcome to " + firebaseUser.getEmail());*/
         //btnLogout = (Button) findViewById(R.id.sign_out);
@@ -132,41 +133,47 @@ public class MainActivity extends TabActivity {
         fragmentTransaction.commit();
     }
 */
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = firebaseAuth.getInstance().getCurrentUser();
+        if(currentUser==null){
+
+        }
+    }
+
     public void Signout() {
         firebaseAuth.signOut();
         finish();
         startActivity(new Intent(MainActivity.this, SignInActivity.class));
     }
-    public void chat(View view) {
-        //startActivity(new Intent(MainActivity.this, MessageActivity.class));
-    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
-//        MenuItem shareItem = menu.findItem(R.id.action_settings);
-//        mShareActionProvider = (ShareActionProvider)
-//                MenuItemCompat.getActionProvider(shareItem);
-//        mShareActionProvider.setShareIntent(getDefaultIntent());
 
         return true;
     }
 
-//    private Intent getDefaultIntent() {
-//        Intent intent = new Intent(Intent.ACTION_SEND);
-//        intent.setType("image/*");
-//        return intent;
-//    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //int i = item.getItemId();
         switch(item.getItemId()){
-            case R.id.action_settings:
+            case R.id.action_user:
+                startActivity(new Intent(MainActivity.this, UserActivity.class));
+                return true;
 
+            case R.id.action_profile:
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                 return true;
             case R.id.action_sign_out:
                Signout();
                 return true;
+
             default:
                return super.onOptionsItemSelected(item);
         }

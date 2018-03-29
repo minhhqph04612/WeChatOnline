@@ -8,10 +8,16 @@
 
 
         <TextView
+            android:id="@+id/text1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/title_activity_friends"/>
-
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"/>
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:paddingBottom="20dp"/>
 
 
 

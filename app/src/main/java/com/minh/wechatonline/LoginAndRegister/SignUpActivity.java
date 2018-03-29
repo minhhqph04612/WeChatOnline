@@ -15,9 +15,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.minh.wechatonline.MainActivity;
 import com.minh.wechatonline.R;
+
+import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -64,21 +68,38 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                            String uid = current_user.getUid();
+                            databaseReference = FirebaseDatabase.getInstance().getReference().child("User").child(uid);
+                            HashMap<String, String> userMap = new HashMap<>();
+                            userMap.put("email",current_user.getEmail());
+                            userMap.put("status","default");
+                            databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Intent mainIntent = new Intent(SignUpActivity.this,MainActivity.class);
+                                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(mainIntent);
+                                    finish();
+                                }
+                            });
 
                             //User user = new User(email,password);
                             //FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             //databaseReference.child("User").child(firebaseUser.getUid()).setValue(user);
-                            startActivity(new Intent(getApplicationContext(), SignInActivity.class));
-                            finish();
+                            //startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+                            //finish();
 
 
                             Toast.makeText(SignUpActivity.this, "Dang Ky thanh Cong", Toast.LENGTH_SHORT).show();
                         } else {
+                            progressDialog.dismiss();
                             Toast.makeText(SignUpActivity.this, "Dang Ky that bai", Toast.LENGTH_SHORT).show();
 
                         }
                     }
                 });
+
 
     }
 

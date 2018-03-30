@@ -7,9 +7,6 @@ package com.minh.wechatonline.model;
 public class User {
     //public String name;
     public String email;
-
-
-
     public String status;
     public User(){}
 

@@ -62,8 +62,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
+                            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
                             finish();
-                            startActivity(new Intent(SignInActivity.this,MainActivity.class));
                             Toast.makeText(getApplicationContext(),"Dang Nhap thanh cong",Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(getApplicationContext(),"Dang Nhap that bai",Toast.LENGTH_SHORT).show();

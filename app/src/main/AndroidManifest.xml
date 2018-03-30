@@ -42,8 +42,10 @@
             android:name=".Friends.FriendsActivity"
             android:label="@string/title_activity_friends" />
         <activity android:name=".News.NewDetailActivity" />
-        <activity android:name=".Activity.ProfileActivity" />
-        <activity android:name=".Activity.UserActivity"></activity>
+        <activity android:name=".Activity.ProfileActivity"
+            android:label="@string/title_profile"/>
+        <activity android:name=".Activity.UserActivity"
+            android:label="@string/title_user"></activity>
     </application>
 
 </manifest>

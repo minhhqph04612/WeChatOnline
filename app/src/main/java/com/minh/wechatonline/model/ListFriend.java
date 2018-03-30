@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by HP on 3/28/2018.
  */
 
-public class ListFriend {
+public class ListFriend<F extends User> {
     private ArrayList<Friend> listFriend;
 
     public ArrayList<Friend> getListFriend() {

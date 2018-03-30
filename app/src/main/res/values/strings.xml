@@ -4,6 +4,7 @@
     <string name="title_friends">Friends</string>
     <string name="title_news">News</string>
     <string name="title_user">User</string>
+
     <string name="title_profile">Profile</string>
     <string name="title_sign_out">Sign Out</string>
     <string name="title_tuychon">TuyChon</string>
@@ -28,4 +29,7 @@
     <string name="title_activity_message">MessageActivity</string>
     <string name="title_activity_news">NewsActivity</string>
     <string name="title_activity_friends">FriendsActivity</string>
+    <!--field data-->
+    <string name="email">Email</string>
+    <string name="status">Status</string>
 </resources>

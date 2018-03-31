@@ -8,10 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="com.minh.wechatonline.Friends.FriendsActivity">
-<ListView
-    android:id="@+id/list_user"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="10dp"></ListView>
+    <ListView
+        android:id="@+id/list_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp"></ListView>
+
 
 </RelativeLayout>

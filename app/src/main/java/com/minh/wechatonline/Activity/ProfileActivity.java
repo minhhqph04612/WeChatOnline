@@ -27,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
         userCurrent = FirebaseAuth.getInstance().getCurrentUser();
         String current_id = userCurrent.getUid();
         userDatabase = FirebaseDatabase.getInstance().getReference().child("User").child(current_id);
+        userDatabase.keepSynced(true);
         userDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

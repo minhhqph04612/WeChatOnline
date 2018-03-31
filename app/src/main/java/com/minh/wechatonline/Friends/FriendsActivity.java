@@ -21,9 +21,8 @@ public class FriendsActivity extends AppCompatActivity {
     //TextView textView;
     private ListFriend<Friend> listFriend;
     private ListView list_User;
-    //private RecyclerView recyclerView;
     private DatabaseReference userDatabase;
-    //FirebaseRecyclerAdapter<User,UsersViewHolder> firebaseRecyclerAdapter;
+
     private FirebaseListAdapter<User> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,7 @@ public class FriendsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         adapter = new FirebaseListAdapter<User>(this,User.class,R.layout.user_single_layout,userDatabase) {
 
             @Override
@@ -46,13 +46,12 @@ public class FriendsActivity extends AppCompatActivity {
                 TextView status = (TextView) view.findViewById(R.id.user_single_status);
                 email.setText(user.getEmail());
                 status.setText(user.getStatus());
-                final String user_id = getRef(position).getKey();
                 //Toast.makeText(UserActivity.this,user_id,Toast.LENGTH_LONG).show();
                 list_User.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        final String user_id = getRef(i).getKey();
                         Intent intent =  new Intent(FriendsActivity.this,UserActivity.class);
-
                         intent.putExtra("user_id",user_id);
                         //Toast.makeText(FriendsActivity.this,listFriend.setListFriend(), Toast.LENGTH_SHORT).show();
                         startActivity(intent);
@@ -61,4 +60,6 @@ public class FriendsActivity extends AppCompatActivity {
             }
         };list_User.setAdapter(adapter);
     }
+
+
 }

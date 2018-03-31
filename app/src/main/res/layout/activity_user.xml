@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="com.minh.wechatonline.Activity.UserActivity">
     <!--<include layout="@layout/action_bar" android:id="@+id/user_action_bar"></include>-->
-
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/user_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-    <!--</android.support.v7.widget.RecyclerView>-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_person_black_24dp"/>
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="match_parent"
@@ -21,23 +19,27 @@
         android:paddingTop="10dp"
         android:textSize="20sp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        />
+        android:layout_marginTop="120dp"
+        android:textAlignment="center"/>
+
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvEmail"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp"
         android:paddingTop="10dp"
-        android:layout_marginTop="100dp"
-        />
+        android:textSize="20sp" />
     <Button
         android:id="@+id/btnRequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send Request"
+        android:text="Send Friend Request"
         android:background="@color/colorHolder"
         android:textColor="#ffffff"
-        android:layout_alignParentBottom="true"/>
+        android:layout_marginTop="400dp" />
 
 </RelativeLayout>

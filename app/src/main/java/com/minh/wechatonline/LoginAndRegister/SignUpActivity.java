@@ -27,17 +27,17 @@ import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    Button btnSignUp, btnSignIn;
-    EditText edtEmail, edtPassword;
-    ProgressDialog progressDialog;
-    FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
+    private Button btnSignUp, btnSignIn;
+    private EditText edtEmail, edtPassword;
+    private ProgressDialog progressDialog;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
     ArrayList<User> listUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        listUser = new ArrayList<>();
+//        listUser = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() != null) {
             finish();

@@ -4,16 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="50dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="com.minh.wechatonline.Friends.FriendsActivity">
-
+    tools:context="com.minh.wechatonline.Activity.ListAllFriendActivity">
     <ListView
-        android:id="@+id/list_user"
+        android:id="@+id/list_friend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="10dp"></ListView>
-
-
+        android:layout_height="wrap_content"></ListView>
 </RelativeLayout>

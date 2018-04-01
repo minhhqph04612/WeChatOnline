@@ -23,6 +23,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     Button btnSignIn, btnSignUp;
     ProgressDialog progressDialog;
     FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

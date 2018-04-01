@@ -50,9 +50,7 @@ public class UserActivity extends AppCompatActivity {
 //        getSupportActionBar().setTitle("All User");
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        recyclerView = (RecyclerView) findViewById(R.id.user_list);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
         final String user_id = getIntent().getStringExtra("user_id");
         userDatabase = FirebaseDatabase.getInstance().getReference().child("User").child(user_id);
         friendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friends_req");
@@ -93,6 +91,7 @@ public class UserActivity extends AppCompatActivity {
                             if (req_type.equals("received")) {
                                 current_state = "req_received";
                                 btnRequest.setText("Accept Friend Request");
+
                             } else if (req_type.equals("sent")) {
                                 current_state = "req_sent";
                                 btnRequest.setText("Cancel Friend Request");
@@ -137,11 +136,13 @@ public class UserActivity extends AppCompatActivity {
                 ///      Not Friend state
                 if (current_state.equals("not_friend")) {
 
-                    friendReqDatabase.child(userCurrent.getUid()).child(user_id).child("request_type").setValue("sent").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    friendReqDatabase.child(userCurrent.getUid()).child(user_id).child("request_type").setValue("sent")
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                friendReqDatabase.child(user_id).child(userCurrent.getUid()).child("request_type").setValue("received").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                friendReqDatabase.child(user_id).child(userCurrent.getUid()).child("request_type").setValue("received")
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
 
@@ -159,13 +160,15 @@ public class UserActivity extends AppCompatActivity {
                     });
 
                 }
-                // cancel sent request
+                //--------------------------- Cancel Friend Request -------------------------
                 if (current_state.equals("req_sent")) {
-                    friendReqDatabase.child(userCurrent.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    friendReqDatabase.child(userCurrent.getUid()).child(user_id).removeValue()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
 
-                            friendReqDatabase.child(user_id).child(userCurrent.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            friendReqDatabase.child(user_id).child(userCurrent.getUid()).removeValue()
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     btnRequest.setEnabled(true);

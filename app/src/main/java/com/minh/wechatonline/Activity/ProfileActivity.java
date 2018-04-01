@@ -2,6 +2,9 @@ package com.minh.wechatonline.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,9 +17,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.minh.wechatonline.R;
 
 public class ProfileActivity extends AppCompatActivity {
+    private Toolbar toolbar;
     private DatabaseReference userDatabase;
     private FirebaseUser userCurrent;
-    TextView tvEmail,tvStatus;
+    private TextView tvEmail,tvStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,4 +50,21 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.action_bar,menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        return true;
+    }
 }

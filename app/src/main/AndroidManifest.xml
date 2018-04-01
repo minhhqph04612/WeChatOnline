@@ -17,8 +17,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginAndRegister.SignInActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,8 +29,7 @@
             android:label="@string/app_name" />
         <activity
             android:name=".LoginAndRegister.SignUpActivity"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_sign_up" />
         <activity
             android:name=".News.NewsActivity"
             android:label="@string/title_activity_news" />
@@ -42,10 +40,13 @@
             android:name=".Friends.FriendsActivity"
             android:label="@string/title_activity_friends" />
         <activity android:name=".News.NewDetailActivity" />
-        <activity android:name=".Activity.ProfileActivity"
-            android:label="@string/title_profile"/>
-        <activity android:name=".Activity.UserActivity"
-            android:label="@string/title_user"></activity>
+        <activity
+            android:name=".Activity.ProfileActivity"
+            android:label="@string/title_profile" />
+        <activity
+            android:name=".Activity.UserActivity"
+            android:label="@string/title_user" />
+        <activity android:name=".Activity.ListAllFriendActivity"></activity>
     </application>
 
 </manifest>

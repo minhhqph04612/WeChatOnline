@@ -52,6 +52,7 @@ public class FriendsActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         final String user_id = getRef(i).getKey();
                         Intent intent =  new Intent(FriendsActivity.this,UserActivity.class);
+
                         intent.putExtra("user_id",user_id);
                         //Toast.makeText(FriendsActivity.this,listFriend.setListFriend(), Toast.LENGTH_SHORT).show();
                         startActivity(intent);

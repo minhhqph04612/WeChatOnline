@@ -5,6 +5,24 @@ package com.minh.wechatonline.model;
  */
 
 public class Friend extends User{
-    public String id;
-    public String idRoom;
+    String id;
+    String date;
+    public Friend(){}
+
+    public Friend(String date) {
+        this.date = date;
+    }
+
+    public Friend(String email, String status, String date) {
+        super(email, status);
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

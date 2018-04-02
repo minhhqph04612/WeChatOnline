@@ -46,7 +46,10 @@
         <activity
             android:name=".Activity.UserActivity"
             android:label="@string/title_user" />
-        <activity android:name=".Activity.ListAllFriendActivity"></activity>
+        <activity android:name=".Activity.ListAllFriendActivity" />
+        <activity android:name=".Activity.AllUsersActivity" />
+        <activity android:name=".Activity.SearchActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

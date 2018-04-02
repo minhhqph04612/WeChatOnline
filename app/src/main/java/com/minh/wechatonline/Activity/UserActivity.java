@@ -151,67 +151,88 @@ public class UserActivity extends AppCompatActivity {
                                         Toast.makeText(UserActivity.this, " Request Send Successful ", Toast.LENGTH_SHORT).show();
 
                                     }
-                                });
+                                });btnRequest.setEnabled(true);
 
                             } else {
                                 Toast.makeText(UserActivity.this, "Failed Sending Request", Toast.LENGTH_SHORT).show();
-                            }btnRequest.setEnabled(true);
+                            }
                         }
                     });
 
                 }
                 //--------------------------- Cancel Friend Request -------------------------
+
                 if (current_state.equals("req_sent")) {
                     friendReqDatabase.child(userCurrent.getUid()).child(user_id).removeValue()
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-
-                            friendReqDatabase.child(user_id).child(userCurrent.getUid()).removeValue()
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    btnRequest.setEnabled(true);
-                                    current_state.equals("not_friend");
-                                    btnRequest.setText("Send Friend Request");
-                                    Toast.makeText(UserActivity.this, " Request Send Successful ", Toast.LENGTH_SHORT).show();
+
+                                    friendReqDatabase.child(user_id).child(userCurrent.getUid()).removeValue()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    btnRequest.setEnabled(true);
+                                                    current_state.equals("not_friend");
+                                                    btnRequest.setText("Send Friend Request");
+                                                    Toast.makeText(UserActivity.this, " Request Send Successful ", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
                                 }
                             });
-                        }
-                    });
                 }
                 //------------------REQ RECEIVED STATE----------------------
                 if (current_state.equals("req_received")) {
                     final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
                     friendDatabase.child(userCurrent.getUid()).child(user_id).setValue(currentDate)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            friendDatabase.child(user_id).child(userCurrent.getUid()).setValue(currentDate)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    friendReqDatabase.child(userCurrent.getUid()).child(user_id).removeValue()
+                                    friendDatabase.child(user_id).child(userCurrent.getUid()).setValue(currentDate)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            friendReqDatabase.child(user_id).child(userCurrent.getUid()).removeValue()
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    btnRequest.setEnabled(true);
-                                                    current_state = "friend";
-                                                    btnRequest.setText("UnFriend This Person");
+                                                    friendReqDatabase.child(userCurrent.getUid()).child(user_id).removeValue()
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    friendReqDatabase.child(user_id).child(userCurrent.getUid()).removeValue()
+                                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                @Override
+                                                                                public void onSuccess(Void aVoid) {
+                                                                                    btnRequest.setEnabled(true);
+                                                                                    current_state = "friend";
+                                                                                    btnRequest.setText("UnFriend This Person");
 
+                                                                                }
+                                                                            });
+                                                                }
+                                                            });
                                                 }
                                             });
-                                        }
-                                    });
+                                }
+                            });
+                }
+                //--------------------UNFRIEND-----------------------------------
+                if(current_state.equals("friend")){
+                    final String  cancelDate = DateFormat.getDateTimeInstance().format(new Date());
+                    friendDatabase.child(userCurrent.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            friendDatabase.child(user_id).child(userCurrent.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    btnRequest.setEnabled(true);
+                                    current_state = "not_friend";
+                                    btnRequest.setText("Send Friend Request");
                                 }
                             });
                         }
                     });
                 }
+
+
+
             }
         });
     }

@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.minh.wechatonline.Activity.SearchActivity;
 import com.minh.wechatonline.R;
 
 import org.jsoup.Jsoup;
@@ -43,6 +46,23 @@ public class NewsActivity extends AppCompatActivity {
         }
 
     };
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.all_user_action_bar,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case R.id.action_search:
+                startActivity(new Intent(NewsActivity.this, SearchActivity.class));
+                return true;
+        }
+        return true;
+    }
     class LoadRss extends AsyncTask<String, Void, ArrayList<NewObject>>
 
     {

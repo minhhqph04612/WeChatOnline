@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.minh.wechatonline.R;
 
 public class ListAllFriendActivity extends AppCompatActivity {
@@ -17,8 +16,7 @@ public class ListAllFriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_all_friend);
-        String user_id;
-        friendDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
+
     }
 
     @Override

@@ -8,6 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="com.minh.wechatonline.Activity.UserActivity">
     <!--<include layout="@layuser_action_bar_bar" android:id="@+id/user_action_bar"></include>-->
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"

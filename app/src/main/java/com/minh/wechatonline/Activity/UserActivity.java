@@ -184,11 +184,11 @@ public class UserActivity extends AppCompatActivity {
                 //------------------REQ RECEIVED STATE----------------------
                 if (current_state.equals("req_received")) {
                     final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
-                    friendDatabase.child(userCurrent.getUid()).child(user_id).setValue(currentDate)
+                    friendDatabase.child(userCurrent.getUid()).child(user_id).child("date").setValue(currentDate)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    friendDatabase.child(user_id).child(userCurrent.getUid()).setValue(currentDate)
+                                    friendDatabase.child(user_id).child(userCurrent.getUid()).child("date").setValue(currentDate)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {

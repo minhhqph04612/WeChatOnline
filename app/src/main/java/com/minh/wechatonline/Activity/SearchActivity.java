@@ -73,6 +73,7 @@ public class SearchActivity extends AppCompatActivity {
             protected void populateViewHolder(SearchHolder viewHolder, SearchUser searchUser, int position) {
                 viewHolder.setEmail(searchUser.getEmail());
                 viewHolder.setStatus(searchUser.getStatus());
+                viewHolder.setImage(searchUser.getImage(),getApplicationContext());
                 final String user_id = getRef(position).getKey();
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -85,7 +86,5 @@ public class SearchActivity extends AppCompatActivity {
             }
         };
         search_list.setAdapter(adapter);
-
-
     }
 }

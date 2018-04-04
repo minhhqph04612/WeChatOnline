@@ -4,18 +4,17 @@ package com.minh.wechatonline.model;
  * Created by HP on 3/28/2018.
  */
 
-public class Friend extends User{
-    String id;
-    String date;
-    public Friend(){}
+public class Friend {
 
-    public Friend(String date) {
-        this.date = date;
+    public String date;
+    public String image;
+    public Friend() {
     }
 
-    public Friend(String email, String status, String date) {
-        super(email, status);
+    public Friend(String date,String image) {
+
         this.date = date;
+        this.image =  image;
     }
 
     public String getDate() {
@@ -24,5 +23,13 @@ public class Friend extends User{
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

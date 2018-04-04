@@ -11,12 +11,13 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by HP on 4/1/2018.
+ * Created by HP on 4/3/2018.
  */
 
-public class SearchHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class UserHolder extends RecyclerView.ViewHolder {
     View view;
-    public SearchHolder(View itemView) {
+
+    public UserHolder(View itemView) {
         super(itemView);
         view = itemView;
     }
@@ -32,9 +33,4 @@ public class SearchHolder extends RecyclerView.ViewHolder implements View.OnClic
         CircleImageView userImage = (CircleImageView) view.findViewById(R.id.user_single_image);
         Picasso.with(context).load(image).placeholder(R.drawable.ic_person_black_24dp).into(userImage);
     }
-    @Override
-    public void onClick(View view) {
-
-    }
-
 }

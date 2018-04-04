@@ -17,14 +17,14 @@ public class ListFriend<F extends User> {
         listFriend = new ArrayList<>();
     }
 
-    public String getEmailById(String id){
-        for(Friend friend: listFriend){
-            if(id.equals(friend.id)){
-                return friend.email;
-            }
-        }
-        return "";
-    }
+//    public String getEmailById(String id){
+//        for(Friend friend: listFriend){
+//            if(id.equals(friend.id)){
+//                return friend.email;
+//            }
+//        }
+//        return "";
+//    }
 
     public void setListFriend(ArrayList<Friend> listFriend) {
         this.listFriend = listFriend;

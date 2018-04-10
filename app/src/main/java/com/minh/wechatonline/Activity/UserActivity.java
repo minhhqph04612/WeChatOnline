@@ -4,11 +4,12 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,7 +36,7 @@ public class UserActivity extends AppCompatActivity {
     private DatabaseReference friendDatabase;
 
 
-    private Toolbar toolbar;
+    private android.support.v7.app.ActionBar actionBar;
 
     private ProgressDialog progressDialog;
     private String current_state;
@@ -44,13 +45,8 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-
-//        toolbar = (Toolbar) findViewById(R.id.user_action_bar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("All User");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         final String user_id = getIntent().getStringExtra("user_id");
         userDatabase = FirebaseDatabase.getInstance().getReference().child("User").child(user_id);
         friendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friends_req");
@@ -237,5 +233,20 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return true;
+    }
 }

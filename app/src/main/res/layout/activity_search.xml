@@ -37,7 +37,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_alignRight="@+id/edt_search"
-            app:srcCompat="@drawable/ic_search_black_24dp"/>
+            app:srcCompat="@mipmap/ic_search_white_24dp"/>
 
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView

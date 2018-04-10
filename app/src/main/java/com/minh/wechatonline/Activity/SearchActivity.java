@@ -2,10 +2,13 @@ package com.minh.wechatonline.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,15 +23,12 @@ import com.minh.wechatonline.R;
 import com.minh.wechatonline.model.SearchUser;
 
 public class SearchActivity extends AppCompatActivity {
-//    private final static String TAG = "SearchActivity";
 
+    private ActionBar actionBar;
     private EditText edtSearch;
     private ImageView imageView;
-//    private ListView search_list;
-
     DatabaseReference userDatabase;
-    //    private ListView search_list;
-//    private FirebaseListAdapter<SearchUser> adapter;
+
     private RecyclerView search_list;
 
     String search;
@@ -37,6 +37,8 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         userDatabase = FirebaseDatabase.getInstance().getReference().child("User");
         imageView = (ImageView) findViewById(R.id.img_btn_search);
         edtSearch = (EditText) findViewById(R.id.edt_search);
@@ -86,5 +88,22 @@ public class SearchActivity extends AppCompatActivity {
             }
         };
         search_list.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return  true;
+        }
+        return true;
     }
 }

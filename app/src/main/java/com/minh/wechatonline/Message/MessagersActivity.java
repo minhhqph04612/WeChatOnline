@@ -5,22 +5,24 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.minh.wechatonline.Activity.SearchActivity;
 import com.minh.wechatonline.R;
 
 public class MessagersActivity extends AppCompatActivity {
-    FirebaseDatabase database;
-    DatabaseReference myRef ;
+
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseRoom;
+    private String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messagers);
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("message");
-        myRef.setValue("Hello","world");
+        user_id =  getIntent().getStringExtra("user_id");
+        Toast.makeText(MessagersActivity.this,user_id,Toast.LENGTH_SHORT).show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

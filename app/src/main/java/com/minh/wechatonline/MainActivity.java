@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.minh.wechatonline.Activity.AllUsersActivity;
 import com.minh.wechatonline.Activity.ProfileActivity;
 import com.minh.wechatonline.Friends.FriendsActivity;
@@ -22,15 +23,30 @@ import com.minh.wechatonline.Message.MessagersActivity;
 import com.minh.wechatonline.News.NewsActivity;
 
 public class MainActivity extends TabActivity {
-    FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+    private DatabaseReference userDataReference;
     TextView tvUserEmail;
-
+    private String current_user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() == null) {
+            finish();
+            //startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }else{
+            Toast.makeText(this,
+                    "Welcome " + firebaseAuth
+                            .getCurrentUser().getEmail(),
+                    Toast.LENGTH_LONG)
+                    .show();
+        }
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        userDataReference = FirebaseDatabase.getInstance().getReference().child("User");
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        current_user_id = firebaseUser.getUid();
         //Tabhost
         TabHost tabHost = getTabHost();
 
@@ -58,22 +74,8 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(messagersspec); // Adding songs tab
         tabHost.addTab(friendsspec); // Adding videos tab
         //fireAuth
-        firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() == null) {
-            finish();
-            //startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        }else{
-            Toast.makeText(this,
-                    "Welcome " + firebaseAuth
-                            .getCurrentUser().getEmail(),
-                    Toast.LENGTH_LONG)
-                    .show();
 
-            // Load chat room contents
 
-        }
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
         /*tvUserEmail = (TextView) findViewById(R.id.useremail);
         tvUserEmail.setText("Welcome to " + firebaseUser.getEmail());*/
@@ -95,12 +97,33 @@ public class MainActivity extends TabActivity {
         super.onStart();
         FirebaseUser currentUser = firebaseAuth.getInstance().getCurrentUser();
         if(currentUser==null){
+            userDataReference.child(current_user_id).child("status").setValue("offline");
+            userDataReference.child(current_user_id).child("lastseen").setValue(ServerValue.TIMESTAMP);
+        }
+        else{
+            userDataReference.child(current_user_id).child("status").setValue("online");
+            userDataReference.child(current_user_id).child("lastseen").setValue(ServerValue.TIMESTAMP);
+        }
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser currentUser = firebaseAuth.getInstance().getCurrentUser();
+        if(currentUser!=null){
+            userDataReference.child(current_user_id).child("status").onDisconnect().setValue("offline");
+            userDataReference.child(current_user_id).child("lastseen").setValue(ServerValue.TIMESTAMP);
+        }
+        else{
+            userDataReference.child(current_user_id).child("status").setValue("online");
+            userDataReference.child(current_user_id).child("lastseen").setValue(ServerValue.TIMESTAMP);
         }
     }
 
     public void Signout() {
         firebaseAuth.signOut();
+        userDataReference.child(current_user_id).child("status").setValue("offline");
+        userDataReference.child(current_user_id).child("lastseen").setValue(ServerValue.TIMESTAMP);
         finish();
         startActivity(new Intent(MainActivity.this, SignInActivity.class));
     }
@@ -118,7 +141,6 @@ public class MainActivity extends TabActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //int i = item.getItemId();
         switch(item.getItemId()){
             case R.id.action_user:
                 startActivity(new Intent(MainActivity.this, AllUsersActivity.class));
@@ -134,6 +156,6 @@ public class MainActivity extends TabActivity {
             default:
                return super.onOptionsItemSelected(item);
         }
-        //return super.onOptionsItemSelected(item);
+
     }
 }

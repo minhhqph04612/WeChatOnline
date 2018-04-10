@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="20dp"
+        android:background="#ef0404"
+        android:textColor="#fff"
+        android:layout_marginBottom="10dp"/>
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnSend"
+        android:layout_alignLeft="@+id/btnSend"
+        android:text="Profile"
+        android:background="#ec4b05"
+        android:textColor="#fff"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"/>
+</LinearLayout>

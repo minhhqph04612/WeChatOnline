@@ -35,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-//        listUser = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() != null) {
             finish();
@@ -76,12 +75,12 @@ public class SignUpActivity extends AppCompatActivity {
                             userMap.put("email",current_user.getEmail());
                             userMap.put("status","default");
 
+
                             databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Intent mainIntent = new Intent(SignUpActivity.this,MainActivity.class);
                                     mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                                     startActivity(mainIntent);
                                     finish();
                                     progressDialog.dismiss();

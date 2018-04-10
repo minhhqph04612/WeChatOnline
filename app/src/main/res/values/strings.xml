@@ -29,6 +29,8 @@
     <string name="title_activity_message">MessageActivity</string>
     <string name="title_activity_news">NewsActivity</string>
     <string name="title_activity_friends">FriendsActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_all_user">AllUsersActivity</string>
     <!--field data-->
     <string name="email">Email</string>
     <string name="status">Status</string>

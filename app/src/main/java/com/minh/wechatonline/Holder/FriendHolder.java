@@ -25,9 +25,9 @@ public  class FriendHolder extends RecyclerView.ViewHolder {
         TextView tvStatus =(TextView) view.findViewById(R.id.user_single_status);
         tvStatus.setText(date);
     }
-    public void setEmail(String email){
+    public void setEmailAndStatus(String email,String status){
         TextView tvEmail =(TextView) view.findViewById(R.id.user_single_email);
-        tvEmail.setText(email);
+        tvEmail.setText(email +"("+ status+")");
     }
     public  void setImage(String image, Context context){
         CircleImageView userImage = (CircleImageView) view.findViewById(R.id.user_single_image);

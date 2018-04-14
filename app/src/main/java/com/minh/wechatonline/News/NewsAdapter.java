@@ -35,11 +35,11 @@ public class NewsAdapter   extends ArrayAdapter<NewObject> {
         }
         ImageView imgAvatar = (ImageView) convertView.findViewById(R.id.imgAvatar);
         TextView title = (TextView) convertView.findViewById(R.id.tvTitle);
-//		TextView pubDate =(TextView) convertView.findViewById(R.id.tvPubDate);
+
 
         NewObject  newObject  =  getItem(position);
         title.setText(newObject.getTitle());
-//		pubDate.setText(truyenObject.getPubDate());
+
 
         //View Anh
         Picasso.with(layoutInflater.getContext()).load(newObject.getImageURL()).into(imgAvatar);

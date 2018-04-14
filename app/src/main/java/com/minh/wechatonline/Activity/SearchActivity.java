@@ -27,11 +27,11 @@ public class SearchActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private EditText edtSearch;
     private ImageView imageView;
-    DatabaseReference userDatabase;
+    private DatabaseReference userDatabase;
 
     private RecyclerView search_list;
 
-    String search;
+    private String search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +73,11 @@ public class SearchActivity extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(SearchHolder viewHolder, SearchUser searchUser, int position) {
+                final String user_id = getRef(position).getKey();
                 viewHolder.setEmail(searchUser.getEmail());
                 viewHolder.setStatus(searchUser.getStatus());
-                viewHolder.setImage(searchUser.getImage(),getApplicationContext());
-                final String user_id = getRef(position).getKey();
+                viewHolder.setImage(searchUser.getImage(),SearchActivity.this);
+
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

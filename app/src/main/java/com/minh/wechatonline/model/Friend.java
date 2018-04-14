@@ -10,13 +10,6 @@ public class Friend {
     public String image;
     public Friend() {
     }
-
-    public Friend(String date,String image) {
-
-        this.date = date;
-        this.image =  image;
-    }
-
     public String getDate() {
         return date;
     }
@@ -32,4 +25,10 @@ public class Friend {
     public void setImage(String image) {
         this.image = image;
     }
+    public Friend(String date,String image) {
+
+        this.date = date;
+        this.image =  image;
+    }
+
 }

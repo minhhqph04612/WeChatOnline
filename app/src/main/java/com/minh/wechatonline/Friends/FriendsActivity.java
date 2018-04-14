@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,8 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minh.wechatonline.Activity.SearchActivity;
 import com.minh.wechatonline.Activity.UserActivity;
-import com.minh.wechatonline.Message.ChatActivity;
 import com.minh.wechatonline.Holder.FriendHolder;
+import com.minh.wechatonline.Message.ChatActivity;
 import com.minh.wechatonline.R;
 import com.minh.wechatonline.model.Friend;
 
@@ -53,7 +52,7 @@ public class FriendsActivity extends AppCompatActivity {
         userDatabase.keepSynced(true);
         list_Friends.setHasFixedSize(true);
         list_Friends.setLayoutManager(new LinearLayoutManager(this));
-        Toast.makeText(FriendsActivity.this, current_user_id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(FriendsActivity.this, current_user_id, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -68,15 +67,16 @@ public class FriendsActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(final FriendHolder viewHolder, final Friend friend, final int position) {
                 viewHolder.setDate(friend.getDate());
-                viewHolder.setImage(friend.getImage(), getApplicationContext());
+
                 final String list_user_id = getRef(position).getKey();
                 userDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         final String userEmail = dataSnapshot.child("email").getValue().toString();
                         final String userStatus = dataSnapshot.child("status").getValue().toString();
-//                        final String image = dataSnapshot.child("image").getValue().toString();
+                        final String userImage = dataSnapshot.child("image").getValue().toString();
                         viewHolder.setEmailAndStatus(userEmail,userStatus);
+                        viewHolder.setImage(userImage,FriendsActivity.this);
                         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -92,6 +92,7 @@ public class FriendsActivity extends AppCompatActivity {
                                         chatIntent.putExtra("user_id",list_user_id);
                                         chatIntent.putExtra("email",userEmail);
                                         chatIntent.putExtra("status",userStatus);
+                                        chatIntent.putExtra("image",userImage);
                                         startActivity(chatIntent);
                                     }
                                 });

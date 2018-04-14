@@ -22,13 +22,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minh.wechatonline.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UserActivity extends AppCompatActivity {
     //    Toolbar toolbar;
     private TextView tvEmail, tvStatus;
+    private CircleImageView profileImage;
     private Button btnRequest;
     private FirebaseUser userCurrent;
     private DatabaseReference userDatabase;
@@ -54,6 +58,7 @@ public class UserActivity extends AppCompatActivity {
         userCurrent = FirebaseAuth.getInstance().getCurrentUser();
         tvEmail = (TextView) findViewById(R.id.tvEmail);
         tvStatus = (TextView) findViewById(R.id.tvStatus);
+        profileImage = (CircleImageView) findViewById(R.id.imgAvatar);
         btnRequest = (Button) findViewById(R.id.btnRequest);
 
 
@@ -72,9 +77,10 @@ public class UserActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String email = dataSnapshot.child("email").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
+                String image =  dataSnapshot.child("image").getValue().toString();
                 tvEmail.setText(email);
                 tvStatus.setText(status);
-
+                Picasso.with(UserActivity.this).load(image).into(profileImage);
                 //Toast.makeText(ProfileActivity.this,user_id,Toast.LENGTH_SHORT).show();
 
                 //--------------- FRIEND LIST / REQUEST FEATURE-----------

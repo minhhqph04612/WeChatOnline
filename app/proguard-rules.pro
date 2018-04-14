@@ -19,3 +19,15 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class android.support.v4.** { *; }
+-keep class android.support.v7.** { *; }
+-keep public class org.jsoup.** {
+public protected *;
+}
+
+-keep class com.nineoldandroids.** { *; }
+-keep class com.afollestad.** { *; }
+-keep class com.readystatesoftware.** { *; }
+
+-keep class com.nostra13.universalimageloader.** { *; }
+

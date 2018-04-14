@@ -74,6 +74,8 @@ public class SignUpActivity extends AppCompatActivity {
                             HashMap<String, String> userMap = new HashMap<>();
                             userMap.put("email",current_user.getEmail());
                             userMap.put("status","default");
+                            userMap.put("image","default");
+                            userMap.put("thumb_image","default");
 
 
                             databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -1,6 +1,10 @@
 package com.minh.wechatonline.Message;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,14 +17,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.minh.wechatonline.Adapter.MessageAdapter;
 import com.minh.wechatonline.R;
 import com.minh.wechatonline.model.Message;
@@ -35,6 +45,7 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference rootDatabase;
     private ImageView btnAdd, btnSendMail;
     private RecyclerView messageList;
+    private SwipeRefreshLayout refreshLayout;
     //private ListView messageList;
     private EditText edtContent;
     private String chat_user_id;
@@ -45,9 +56,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private MessageAdapter adapter;
     private static final int TOTAL_ITEM_TO_LOAD= 10;
-    private int Current_Page= 0;
+    private int Current_Page= 2;
+    private static final int GALLARY_PICK = 1;
+    private StorageReference messageImageStorage;
 
-//    private MAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +78,11 @@ public class ChatActivity extends AppCompatActivity {
         btnSendMail = (ImageView) findViewById(R.id.btnSendMail);
         adapter = new MessageAdapter(arrMessage);
         messageList = (RecyclerView) findViewById(R.id.listMessages);
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshLayout);
         messageList.setHasFixedSize(true);
         messageList.setLayoutManager(new LinearLayoutManager(this));
         messageList.setAdapter(adapter);
+        messageImageStorage = FirebaseStorage.getInstance().getReference();
         loadMessages();
 
         actionBar.setTitle(chat_user_email);
@@ -99,17 +113,87 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gallaryIntent =  new Intent();
+                gallaryIntent.setType("image/*");
+                gallaryIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(gallaryIntent,"Select Image"),GALLARY_PICK);
+            }
+        });
         btnSendMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendMessenger();
             }
         });
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Current_Page++;
+                arrMessage.clear();
+                loadMessages();
+            }
+        });
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == GALLARY_PICK && resultCode == RESULT_OK){
+            Uri imageUri = data.getData();
+
+            final String current_user_ref = "messages/" + current_user_id + "/" + chat_user_id;
+            final String chat_user_ref = "messages/" + chat_user_id + "/" + current_user_id;
+
+            DatabaseReference user_message_push = rootDatabase.child("messages")
+                    .child(current_user_id).child(chat_user_id).push();
+
+            final String push_id = user_message_push.getKey();
+
+            StorageReference filePath =  messageImageStorage.child("message_images").child(push_id+".jpg");
+            filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if(task.isSuccessful()){
+                        String download_url = task.getResult().getDownloadUrl().toString();
+
+                        Map messageMap = new HashMap();
+                        messageMap.put("message", download_url);
+                        messageMap.put("seen", false);
+                        messageMap.put("type", "text");
+                        messageMap.put("time",ServerValue.TIMESTAMP);
+                        messageMap.put("from",current_user_id);
+                        //messageMap.put("image",)
+                        Map messageUserMap = new HashMap();
+                        messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
+                        messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
+
+                        edtContent.setText("");
+                        rootDatabase.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                if(databaseError!= null){
+                                    Log.d("CHAT_LOG",databaseError.getMessage().toString());
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+        }
+    }
+    //Load Message
     private void loadMessages() {
-        rootDatabase.child("messages").child(current_user_id).child(chat_user_id).addChildEventListener(new ChildEventListener() {
+        DatabaseReference messageDatabase =  rootDatabase.child("messages").child(current_user_id).child(chat_user_id);
+
+        Query messageQuery =  messageDatabase.limitToLast(Current_Page + TOTAL_ITEM_TO_LOAD);
+
+        messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
@@ -117,6 +201,7 @@ public class ChatActivity extends AppCompatActivity {
                 arrMessage.add(message);
                 adapter.notifyDataSetChanged();
                 messageList.scrollToPosition(arrMessage.size()-1);
+                refreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -158,7 +243,7 @@ public class ChatActivity extends AppCompatActivity {
             messageMap.put("type", "text");
             messageMap.put("time",ServerValue.TIMESTAMP);
             messageMap.put("from",current_user_id);
-
+            //messageMap.put("image",)
             Map messageUserMap = new HashMap();
             messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
             messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);

@@ -88,9 +88,7 @@ public class NewsActivity extends AppCompatActivity {
 
 
                     String title = item.select("title").text();
-                    //String pubDate  = item.select("pubDate").text();
                     String link = item.select("link").text();
-                    //String guid = item.select("guid").text();
 
                     String  description = item.select("description").text();
 

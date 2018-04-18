@@ -56,7 +56,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private MessageAdapter adapter;
     private static final int TOTAL_ITEM_TO_LOAD= 10;
-    private int Current_Page= 2;
+    private int Current_Page= 1;
     private static final int GALLARY_PICK = 1;
     private StorageReference messageImageStorage;
 
@@ -274,6 +274,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case android.R.id.home:
+                //startActivity(new Intent(ChatActivity.this, MainActivity.class));
                 finish();
                 return true;
         }

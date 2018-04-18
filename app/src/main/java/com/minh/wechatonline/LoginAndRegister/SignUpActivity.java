@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +26,8 @@ import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private Button btnSignUp, btnSignIn;
+    private Button btnSignUp;
+    private TextView tvSignIn;
     private EditText edtEmail, edtPassword;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
@@ -42,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
         progressDialog = new ProgressDialog(this);
         btnSignUp = (Button) findViewById(R.id.btnDangKy);
-        btnSignIn = (Button) findViewById(R.id.btnDangNhap);
+        tvSignIn = (TextView) findViewById(R.id.tvSignIn) ;
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
 

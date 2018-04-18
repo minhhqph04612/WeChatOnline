@@ -1,28 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_dialog_friend">
+
+    <!--<TextView-->
+        <!--android:id="@+id/tvTitle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginBottom="100dp"-->
+        <!--android:layout_marginEnd="12dp"-->
+        <!--android:layout_marginLeft="100dp"-->
+        <!--android:layout_marginRight="12dp"-->
+        <!--android:layout_marginStart="100dp"-->
+        <!--android:layout_marginTop="12dp"-->
+        <!--android:layout_toLeftOf="@+id/btnProfile"-->
+        <!--android:layout_toStartOf="@+id/btnProfile"-->
+        <!--android:text="Select Button"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textColor="#000"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="bold" />-->
     <Button
         android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
-        android:background="#ef0404"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/background_button_send_friend"
+        android:text="Send"
         android:textColor="#fff"
-        android:layout_marginBottom="10dp"/>
+        />
+
     <Button
         android:id="@+id/btnProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btnSend"
-        android:layout_alignLeft="@+id/btnSend"
+        android:layout_alignBaseline="@+id/btnSend"
+        android:layout_alignBottom="@+id/btnSend"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/background_button_profile_friend"
         android:text="Profile"
-        android:background="#ec4b05"
-        android:textColor="#fff"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"/>
-</LinearLayout>
+
+        android:textColor="#fff" />
+
+
+</RelativeLayout>

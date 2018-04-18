@@ -54,7 +54,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             messageText = (TextView) itemView.findViewById(R.id.message_text_layout);
             messageTime  =  (TextView) itemView.findViewById(R.id.message_text_time);
             profileImage = (CircleImageView) itemView.findViewById(R.id.message_profile_layout);
-            //userEmail = (TextView) itemView.findViewById(R.id.message_single_user_email);
+            userEmail = (TextView) itemView.findViewById(R.id.message_single_user_email);
             messageImage = (ImageView) itemView.findViewById(R.id.message_single_image);
 
         }
@@ -70,6 +70,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         Message c = listMessage.get(position);
         final String from_user_id = c.getFrom();
         String message_type = c.getType();
+        final long messageTime = c.getMessageTime();
         userDatabase = FirebaseDatabase.getInstance().getReference().child("User").child(from_user_id);
         userDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,16 +81,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 if(from_user_id.equals(current_user_id)){
                     holder.messageText.setBackgroundResource(R.drawable.message_text_background);
                     holder.messageText.setTextColor(Color.WHITE);
-                    Picasso.with(holder.profileImage.getContext()).load(userImage).placeholder(R.drawable.ic_person_black_24dp).into(holder.profileImage);
+                    Picasso.with(holder.profileImage.getContext()).load(userImage).placeholder(R.mipmap.ic_account_circle_white_24dp).into(holder.profileImage);
 
                 }else{
 
                     holder.messageText.setBackgroundColor(Color.WHITE);
                     holder.messageText.setTextColor(Color.BLACK);
-                    Picasso.with(holder.profileImage.getContext()).load(userImage).placeholder(R.drawable.ic_person_black_24dp).into(holder.profileImage);
+                    Picasso.with(holder.profileImage.getContext()).load(userImage).placeholder(R.mipmap.ic_account_circle_white_24dp).into(holder.profileImage);
 
                 }
-
+                holder.messageTime.setText(""+messageTime);
             }
 
             @Override

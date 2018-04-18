@@ -13,8 +13,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/ic_person_black_24dp" />
+        app:srcCompat="@mipmap/ic_account_circle_white_24dp" />
 
+    <TextView
+        android:id="@+id/message_single_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+         />
 
     <TextView
         android:id="@+id/message_text_layout"
@@ -30,7 +36,8 @@
         android:text="Message"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="14sp"
-        tools:textColor="#fff" />
+        tools:textColor="#fff"
+        android:layout_below="@+id/message_user"/>
 
 
 

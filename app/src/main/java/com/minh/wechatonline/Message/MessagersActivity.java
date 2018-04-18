@@ -2,7 +2,9 @@ package com.minh.wechatonline.Message;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.minh.wechatonline.Activity.GroupActivity;
 import com.minh.wechatonline.Activity.SearchActivity;
 import com.minh.wechatonline.R;
 import com.minh.wechatonline.model.Conversation;
@@ -28,7 +31,7 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessagersActivity extends AppCompatActivity {
-
+    private FloatingActionButton btnAddGroup;
     private RecyclerView listConv;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference conversationDatabase;
@@ -40,6 +43,7 @@ public class MessagersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messagers);
+        btnAddGroup = (FloatingActionButton) findViewById(R.id.fab);
         listConv = (RecyclerView)  findViewById(R.id.listConversation);
         firebaseAuth = FirebaseAuth.getInstance();
         current_user_id = firebaseAuth.getCurrentUser().getUid();
@@ -47,7 +51,7 @@ public class MessagersActivity extends AppCompatActivity {
         conversationDatabase.keepSynced(true);
         userDatabase  = FirebaseDatabase.getInstance().getReference().child("User");
 
-        messagesDatabase = FirebaseDatabase.getInstance().getReference().child("mesaages").child(current_user_id);
+        messagesDatabase = FirebaseDatabase.getInstance().getReference().child("messages").child(current_user_id);
         messagesDatabase.keepSynced(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -57,6 +61,14 @@ public class MessagersActivity extends AppCompatActivity {
         listConv.setHasFixedSize(true);
         listConv.setLayoutManager(layoutManager);
         //Toast.makeText(MessagersActivity.this,user_id,Toast.LENGTH_SHORT).show();
+        btnAddGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent groupIntent =  new Intent(MessagersActivity.this, GroupActivity.class);
+                groupIntent.putExtra("user_id",current_user_id);
+                startActivity(groupIntent);
+            }
+        });
     }
 
     @Override
@@ -109,6 +121,7 @@ public class MessagersActivity extends AppCompatActivity {
                         String image =  dataSnapshot.child("image").getValue().toString();
                         String status = dataSnapshot.child("status").getValue().toString();
                         viewHolder.setEmail(email);
+
                         viewHolder.setStatus(status);
                         viewHolder.setImage(image, MessagersActivity.this);
                         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +166,10 @@ public class MessagersActivity extends AppCompatActivity {
     }
     public static class ConversationHolder extends RecyclerView.ViewHolder {
         View view;
+        public static final char SPACE = ' ';
+        public static final char TAB = '\t';
+        public static final char BREAK_LINE = '\n';
+
         public ConversationHolder(View itemView) {
             super(itemView);
             view = itemView;
@@ -172,12 +189,30 @@ public class MessagersActivity extends AppCompatActivity {
         }
         public void setStatus(String status){
             TextView tvStatus =  (TextView) view.findViewById(R.id.user_single_status);
+            if(status.equals("online")){
+                tvStatus.setTextColor(Color.GREEN);
+            }else{
+                tvStatus.setTextColor(Color.RED);
+            }
             tvStatus.setText(status);
         }
         public void setImage(String image, Context context){
             CircleImageView profileImage = (CircleImageView) view.findViewById(R.id.profileImage);
             Picasso.with(context).load(image).placeholder(R.drawable.ic_person_black_24dp).into(profileImage);
         }
+        public String lastMessage(String message){
+            String lastMessage = "";
+            if(message.length() <15) {
+                lastMessage =message;
+            }
+            else {
+                lastMessage += message.substring(1,15);
+            }
+            return lastMessage;
+        }
+
     }
+
+
 
 }

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,7 +21,9 @@ import com.minh.wechatonline.R;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
     EditText edtEmail,edtPassword;
-    Button btnSignIn, btnSignUp;
+    Button btnSignIn;
+//    Button btnSignUp;
+    TextView tvSignUp;
     ProgressDialog progressDialog;
     FirebaseAuth firebaseAuth;
 
@@ -39,9 +42,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         btnSignIn = (Button) findViewById(R.id.btnDangNhap);
-        btnSignUp = (Button) findViewById(R.id.btnDangKy);
+        tvSignUp = (TextView) findViewById(R.id.tvDangKy);
+        btnSignIn.setBackgroundResource(R.drawable.background_button_sign_in);
         btnSignIn.setOnClickListener(this);
-        btnSignUp.setOnClickListener(this);
+        tvSignUp.setOnClickListener(this);
 
     }
     private void DangNhap(){
@@ -80,7 +84,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         if(view == btnSignIn){
             DangNhap();
         }
-        if(view == btnSignUp){
+        if(view == tvSignUp){
             finish();
             startActivity(new Intent(SignInActivity.this,SignUpActivity.class));
         }

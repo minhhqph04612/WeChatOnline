@@ -35,19 +35,28 @@
             android:inputType="textPassword"/>
 
         <Button
-            android:id="@+id/btnDangNhap"
-            android:layout_width="match_parent"
+            android:id="@+id/btnDangKy"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SignUp"
-            android:onClick="DangKy"/>
-        <Button
-            android:id="@+id/btnDangKy"
+            android:onClick="DangKy"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/background_button_sign_up"
+            android:textColor="#fff"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            />
+        <TextView
+            android:id="@+id/tvSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ready Sign In?"
-            android:textColor="#000"
-            android:layout_marginTop="10dp"
-            android:background="#fff"
-            android:onClick="DangNhap"/>
+            android:text="Ready sign in ? If you have account."
+            android:textColor="#fd0213"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:onClick="DangNhap"
+            android:padding="5dp"/>
     </LinearLayout>
 </RelativeLayout>

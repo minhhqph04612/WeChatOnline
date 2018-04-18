@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="50dp"
     tools:context="com.minh.wechatonline.Message.MessagersActivity">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listConversation"
@@ -11,4 +12,17 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:alpha="0.8"
+        app:backgroundTint="@android:color/holo_green_dark"
+        app:srcCompat="@drawable/ic_group_black_24dp" />
 </RelativeLayout>

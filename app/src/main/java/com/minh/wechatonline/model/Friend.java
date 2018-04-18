@@ -5,7 +5,7 @@ package com.minh.wechatonline.model;
  */
 
 public class Friend {
-
+    private String id;
     public String date;
     public String image;
     public Friend() {
@@ -25,8 +25,17 @@ public class Friend {
     public void setImage(String image) {
         this.image = image;
     }
-    public Friend(String date,String image) {
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Friend(String date, String image) {
+        this.id = getId();
         this.date = date;
         this.image =  image;
     }

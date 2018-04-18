@@ -7,7 +7,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
-        app:srcCompat="@drawable/ic_person_black_24dp"/>
+        app:srcCompat="@mipmap/ic_account_circle_white_24dp"/>
 
     <TextView
         android:id="@+id/chat_user_email"
@@ -21,7 +21,8 @@
         android:padding="2dp"
         android:text="Email"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="#fa0404"/>
 
     <TextView
         android:id="@+id/last_message"

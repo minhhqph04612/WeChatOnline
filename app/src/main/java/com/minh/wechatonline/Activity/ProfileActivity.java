@@ -73,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if(!image.equals("default")) {
                     Picasso.with(ProfileActivity.this).load(image).into(profileImage);
                 }else {
-                    profileImage.setImageResource(R.drawable.ic_person_black_24dp);
+                    profileImage.setImageResource(R.mipmap.ic_account_circle_white_24dp);
                 }
             }
 

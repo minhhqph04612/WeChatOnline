@@ -36,7 +36,7 @@ public class MainActivity extends TabActivity {
         if (firebaseAuth.getCurrentUser() == null) {
             finish();
             //startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        }else{
+        } else {
             Toast.makeText(this,
                     "Welcome " + firebaseAuth
                             .getCurrentUser().getEmail(),
@@ -52,20 +52,20 @@ public class MainActivity extends TabActivity {
 
         // Tab for News
         TabHost.TabSpec newspec = tabHost.newTabSpec("News");
-        newspec.setIndicator("News",getResources().getDrawable(R.drawable.ic_art_track_black_24dp));
+        newspec.setIndicator("News", getResources().getDrawable(R.drawable.ic_art_track_black_24dp));
         Intent photosIntent = new Intent(this, NewsActivity.class);
         newspec.setContent(photosIntent);
 
         // Tab for Messagers
         TabHost.TabSpec messagersspec = tabHost.newTabSpec("Messagers");
         // setting Title and Icon for the Tab
-        messagersspec.setIndicator("Messagers",getResources().getDrawable(R.drawable.ic_chat_bubble_black_24dp));
-        Intent songsIntent = new Intent(this,  MessagersActivity.class);
+        messagersspec.setIndicator("Messagers", getResources().getDrawable(R.drawable.ic_chat_bubble_black_24dp));
+        Intent songsIntent = new Intent(this, MessagersActivity.class);
         messagersspec.setContent(songsIntent);
 
         // Tab for Friends
         TabHost.TabSpec friendsspec = tabHost.newTabSpec("Friends");
-        friendsspec.setIndicator("Friends",getResources().getDrawable(R.drawable.ic_people_black_24dp));
+        friendsspec.setIndicator("Friends", getResources().getDrawable(R.drawable.ic_people_black_24dp));
         Intent videosIntent = new Intent(this, FriendsActivity.class);
         friendsspec.setContent(videosIntent);
 
@@ -73,24 +73,7 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(newspec); // Adding photos tab
         tabHost.addTab(messagersspec); // Adding songs tab
         tabHost.addTab(friendsspec); // Adding videos tab
-        //fireAuth
-
-
-
-        /*tvUserEmail = (TextView) findViewById(R.id.useremail);
-        tvUserEmail.setText("Welcome to " + firebaseUser.getEmail());*/
-        //btnLogout = (Button) findViewById(R.id.sign_out);
-
-
-
     }
-
-   /* private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_frame,fragment);
-        fragmentTransaction.commit();
-    }
-*/
 
     @Override
     protected void onStart() {
@@ -114,10 +97,10 @@ public class MainActivity extends TabActivity {
             userDataReference.child(current_user_id).child("status").onDisconnect().setValue("offline");
             userDataReference.child(current_user_id).child("lastseen").setValue(ServerValue.TIMESTAMP);
         }
-        else{
-            userDataReference.child(current_user_id).child("status").setValue("online");
-            userDataReference.child(current_user_id).child("lastseen").setValue(ServerValue.TIMESTAMP);
-        }
+//        else{
+//            userDataReference.child(current_user_id).child("status").setValue("online");
+//            userDataReference.child(current_user_id).child("lastseen").setValue(ServerValue.TIMESTAMP);
+//        }
     }
 
     public void Signout() {

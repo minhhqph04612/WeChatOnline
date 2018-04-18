@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 public class Message {
     private String message, type;
-    private String messageTime;
+    private long messageTime;
 
     private boolean seen;
     private String from;
@@ -25,18 +25,11 @@ public class Message {
         this.message = message;
         this.seen = seen;
         this.type = type;
-        this.messageTime = getMessageTime();
+        messageTime =  Calendar.getInstance().getTimeInMillis();
 
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
-        int second = c.get(Calendar.SECOND);
 
-        messageTime = year + "-" + (month + 1) + "-" + day //
-                + " (" + hour + ":" + minute + ":" + second + ")";
+
+
     }
 
     public String getFrom() {
@@ -63,11 +56,11 @@ public class Message {
         this.type = type;
     }
 
-    public String getMessageTime() {
+    public long getMessageTime() {
         return messageTime;
     }
 
-    public void setMessageTime(String messageTime) {
+    public void setMessageTime(long messageTime) {
         this.messageTime = messageTime;
     }
 

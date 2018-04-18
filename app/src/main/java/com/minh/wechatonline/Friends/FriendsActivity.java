@@ -104,7 +104,9 @@ public class FriendsActivity extends AppCompatActivity {
                                         startActivity(userIntent);
                                     }
                                 });
+
                                 dialog.show();
+
                             }
                         });
                     }

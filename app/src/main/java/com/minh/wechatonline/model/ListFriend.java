@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * Created by HP on 3/28/2018.
  */
 
-public class ListFriend<F extends User> {
+public class ListFriend  {
+
     private ArrayList<Friend> listFriend;
 
     public ArrayList<Friend> getListFriend() {
@@ -17,14 +18,15 @@ public class ListFriend<F extends User> {
         listFriend = new ArrayList<>();
     }
 
-//    public String getEmailById(String id){
-//        for(Friend friend: listFriend){
-//            if(id.equals(friend.id)){
-//                return friend.email;
-//            }
-//        }
-//        return "";
-//    }
+    public String getEmailById(String id){
+        for(Friend friend: listFriend){
+            if(id.equals(friend.getId())){
+                return friend.getId();
+
+            }
+        }
+        return "";
+    }
 
     public void setListFriend(ArrayList<Friend> listFriend) {
         this.listFriend = listFriend;
